@@ -1,62 +1,30 @@
-let str = 0;
 
-let NickName = str || null || NaN || false;
-console.log(NickName);
+const primes = [2, 3, 5, 7, 11, 13, 17, 19, 13];
+reverceArray(primes);
+printarray(primes);
+console.log('====================');
+let index = search(13, primes);
+console.log(index)
 
-greeting();
-greeting(str);
-
-function greeting(nname){
-    nname = nname ?? "Anonymous";
-    console.log(`Hello ${nname}`);
+function reverceArray(arr){
+    for(let i=0,j=arr.length-1; i<j; i++,j--){
+        let rem = arr[j];
+        arr[j] = arr[i];
+        arr[i] = rem;
+    }
 }
-///////////////////////////////////////////////////////////////////////////
-///////////////ARRAYS//////////////////////////////////////////////////////
-console.log("Arrays->>>>>>");
-const arr = [1,2,3, 'four', 'five', true];
-console.log(typeof(arr));
-console.log(arr[3]);
-console.log(arr.length);
-arr[10] = 100;
-prinarray(arr);
-console.log('+++++++++')
 
-function prinarray(arr){
-    console.log("=======================");
+function search(item, arr){
+    let moreThenOne = [];
+    for(let i=0, j = 0, rem; i < arr.length; i++, rem === -1 ? j : j++){
+        arr[i] === item ? rem = i : rem = -1;
+        rem != -1 ? moreThenOne[j] = rem : moreThenOne[j];
+        }
+    return moreThenOne;
+}
+
+function printarray(arr){
     for(let i = 0; i < arr.length; i++){
         console.log(arr[i]);
     }
-    console.log("=======================");
 }
-
-const greeting1 = function (name) {
-    console.log(`Hello ${name}`);
-}
-
-greeting1("John");
-
-console.log('==========================================');
-function pow2(x){
-    return x*x;
-}
-
-function factorial(n){
-    let res = 1;
-    for(let i = 1; i<=n; i++){
-        res *= i;
-    }
-    return res;
-}
-
-function uniFunc(x, fn1, fn2){
-    if(x >= 0){
-        return fn1(x);
-    }
-    else return fn2(x);
-}
-
-let res = uniFunc(5, factorial, pow2);
-console.log(res);
-
-
-//HW! ====================================================>
