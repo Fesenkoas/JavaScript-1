@@ -20,7 +20,9 @@ function search(item, arr){
         arr[i] === item ? rem = i : rem = -1;
         rem != -1 ? moreThenOne[j] = rem : moreThenOne[j];
         }
-    return moreThenOne;
+        if(moreThenOne.length > 0){
+            return moreThenOne}
+        else return -1;
 }
 
 function printarray(arr){
