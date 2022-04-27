@@ -1,32 +1,60 @@
+///////////OBJECT///////////////
+const person = {
+    firsname: "John",
+    lastname: "Smith",
+    age: 27,
+    fullName: function () {
+        return `${this.firsname} ${this.lastname}`;
+    }
+};
+console.log(person.firsname, person.lastname, person.age);
+person.age = 35;
+console.log(person.firsname, person.lastname, person.age);
+console.log('=========================');
+console.log(person.fullName());
 
-const primes = [2, 3, 5, 7, 11, 13, 17, 19, 13];
-reverceArray(primes);
-printarray(primes);
-console.log('====================');
-let index = search(13, primes);
-console.log(index)
-
-function reverceArray(arr){
-    for(let i=0,j=arr.length-1; i<j; i++,j--){
-        let rem = arr[j];
-        arr[j] = arr[i];
-        arr[i] = rem;
+const peter = {
+    firsname: "Peter",
+    lastname: "Jacson",
+    age: 34,
+    'best hobby': 'chess',
+    fullName: function () {
+        return `${this.firsname} ${this.lastname}`;
     }
 }
+console.log(peter.fullName());
+peter.firsname = 'Rabindranat';
+console.log(peter.fullName());
+console.log(person);
+delete peter.age;
+console.log(person["age"]);
+let key = 'lastname';
+console.log(person[key]);
+console.log(person.key);
+console.log('======================');
+printObject(peter);
+const mary = new Person(3000, 'Mary', 'Smith', 18);
+console.log('======================');
+printObject(mary);
+const persons = [mary, Person(4000, 'Tigran', 'Petrosyan', 42), peter];
+console.log(persons[0]);
 
-function search(item, arr){
-    let moreThenOne = [];
-    for(let i=0, j = 0, rem; i < arr.length; i++, rem === -1 ? j : j++){
-        arr[i] === item ? rem = i : rem = -1;
-        rem != -1 ? moreThenOne[j] = rem : moreThenOne[j];
+function printObject(obj) {
+    for (let key in obj) {
+        if (typeof obj[key] === 'function') {
+            console.log(`${key} -> ${obj[key]()}`);
         }
-        if(moreThenOne.length > 0){
-            return moreThenOne}
-        else return -1;
-}
-
-function printarray(arr){
-    for(let i = 0; i < arr.length; i++){
-        console.log(arr[i]);
+        else console.log(`${key} -> ${obj[key]}`);
     }
 }
+
+function Person(id, firstname, lastname, age) {
+    this.id = id;
+    this.firsname = firstname;
+    this.lastname = lastname;
+    this.age = +age;
+    this.fullName = function () {
+        return `${this.firsname} ${this.lastname}`;
+    }
+}
+console.log('======================');
