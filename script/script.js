@@ -1,60 +1,57 @@
-///////////OBJECT///////////////
-const person = {
-    firsname: "John",
-    lastname: "Smith",
-    age: 27,
-    fullName: function () {
-        return `${this.firsname} ${this.lastname}`;
-    }
-};
-console.log(person.firsname, person.lastname, person.age);
-person.age = 35;
-console.log(person.firsname, person.lastname, person.age);
-console.log('=========================');
-console.log(person.fullName());
+const arr = [9, 2, 4, 1, 5, 2, 9, 1, 2, 0];
+console.log('before');
+printArray(arr);
+bubbleSort(arr);
+console.log('after');
+printArray(arr);//0,1,1,2,2,2,4,5,9,9
+const persons = [new Person(3000, 'Mary', 'Smith', 18), new Person(4000, 'Tigran', 'Petrosian', 42),
+new Person(2000, 'Peter', 'Jackson', '42'), new Person(1000, 'John', 'Smith', 27)];
+console.log('before');
+printArray(persons);
+bubbleSortByAge(persons);
+console.log('after');
+printArray(persons);
 
-const peter = {
-    firsname: "Peter",
-    lastname: "Jacson",
-    age: 34,
-    'best hobby': 'chess',
-    fullName: function () {
-        return `${this.firsname} ${this.lastname}`;
+function bubbleSort(arr) {
+    for (let j = 0; j < arr.length; j++) {
+        for (let i = 0, rem; i < arr.length; i++) {
+            if (arr[i] > arr[i + 1]) {
+                rem = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = rem;
+            }
+        }
     }
 }
-console.log(peter.fullName());
-peter.firsname = 'Rabindranat';
-console.log(peter.fullName());
-console.log(person);
-delete peter.age;
-console.log(person["age"]);
-let key = 'lastname';
-console.log(person[key]);
-console.log(person.key);
-console.log('======================');
-printObject(peter);
-const mary = new Person(3000, 'Mary', 'Smith', 18);
-console.log('======================');
-printObject(mary);
-const persons = [mary, Person(4000, 'Tigran', 'Petrosyan', 42), peter];
-console.log(persons[0]);
+
+function bubbleSortByAge(persons) {
+    persons.sort((prev, next) => +prev.age - +next.age);
+}
+
+function printArray(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
+    }
+    console.log('==========================');
+}
 
 function printObject(obj) {
-    for (let key in obj) {
-        if (typeof obj[key] === 'function') {
-            console.log(`${key} -> ${obj[key]()}`);
+    for (let k in obj) {
+        if (typeof obj[k] === 'function') {
+            console.log(`${k} -> ${obj[k]()}`);
+        } else {
+            console.log(`${k} -> ${obj[k]}`);
         }
-        else console.log(`${key} -> ${obj[key]}`);
     }
+    console.log('======================');
 }
 
-function Person(id, firstname, lastname, age) {
+function Person(id, firstName, lastName, age) {
     this.id = id;
-    this.firsname = firstname;
-    this.lastname = lastname;
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.age = +age;
     this.fullName = function () {
-        return `${this.firsname} ${this.lastname}`;
+        return `${this.firstName} ${this.lastName}`;
     }
 }
-console.log('======================');
