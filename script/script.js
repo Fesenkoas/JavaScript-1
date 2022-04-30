@@ -13,8 +13,8 @@ console.log('after');
 printArray(persons);
 
 function bubbleSort(arr) {
-    for (let j = 0; j < arr.length; j++) {
-        for (let i = 0, rem; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - 1; j++) {
+        for (let i = 0, rem; i < arr.length-1; i++) {
             if (arr[i] > arr[i + 1]) {
                 rem = arr[i];
                 arr[i] = arr[i + 1];
@@ -25,7 +25,15 @@ function bubbleSort(arr) {
 }
 
 function bubbleSortByAge(persons) {
-    persons.sort((prev, next) => +prev.age - +next.age);
+    for (let j = 0; j < persons.length - 1; j++) {
+        for (let i = 0, rem; i < persons.length - 1; i++) {
+            if (+persons[i].age > +persons[i + 1].age) {
+                rem = persons[i];
+                persons[i] = persons[i + 1];
+                persons[i + 1] = rem;
+            }
+        }
+    }
 }
 
 function printArray(arr) {
