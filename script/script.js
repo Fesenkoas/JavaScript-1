@@ -1,100 +1,45 @@
-//number
-let x = 10.4;
-let res = Math.round(x);
-console.log(res);
-res = Math.trunc(x);
-console.log(res);
-res = Math.floor(x);
-console.log(res);
-console.log(Math.PI);
-res = Math.max(7, 2, 9, 11, 4);
-console.log(res);
-res = Math.pow(3, 4);
-console.log(res);
-res = Math.random();
-console.log(res);
-console.log(rndm(1, 4));
-console.log('=========================');
-//////////////////////////////////////////////////////////////////////////
-//String
-x = '             Two beer or not two beer                    ';
-console.log(x);
-x = x.trim();
-console.log(x);
-res = x.split(' ');
-console.log(res);
-res = x.toUpperCase();
-console.log(res);
-res = x.toLowerCase();
-console.log(res);
-res = x.length;
-console.log(res);
-res = x.charAt(1);
-console.log(res);
-res = x[1];
-console.log(res);
-res = x.indexOf('e');
-console.log(res);
-res = x.lastIndexOf('e');
-console.log(res);
-res = x.startsWith('Two');
-console.log(res);
-res = x.substring(4, 8);
-console.log(res);
-res = x.slice(4, 8);
-console.log(res);
-console.log('=========================');
-//////////////////////////////////////////////////////////////////////////
-//arrays
-const arr = [1, 2, 3, 'four', 'five'];
-console.log(typeof arr);
-arr.push(6);
-console.log('===push===');
-console.log(arr);
-console.log('===pop===');
-res = arr.pop();
-console.log(arr);
-console.log(res);
-console.log('===shift===');
-res = arr.shift();
-console.log(arr);
-console.log(res);
-console.log('===unshift===');
-arr.unshift(1);
-console.log(arr);
-const arr1 = ['one', 'two', 'three'];
-const arr2 = ['four', 'five'];
-console.log('===concat===');
-const arr3 = arr1.concat(arr2);
-console.log(arr1);
-console.log(arr2);
-console.log(arr3);
-console.log('===slice===');
-res = arr.slice(2, 4);
-console.log(arr);
-console.log(res);
-console.log('===splice===');
-//arr.splice(1,2, -10, -20, -30);
-//arr.splice(1, 0, -30);
-//arr.splice(0, 1);//arr.shift()
-//arr.splice(0, 0, -10, -20);//arr.unshift()
-//arr.splice(arr.length - 1, 1);//arr.pop()
-arr.splice(arr.length, 0, 100);//arr.push()
-console.log(arr);
-//////////////////////////////////////////////////////////////////////////
-//modals
-// alert('Hello');
+/////////////////////////////////
+//library////////////////////////
+/////////////////////////////////
+const library = [];
+let inputData = prompt('Enter book data separate by ";" with four fildes like "isbn;title;author;year"');
 
-// const check = confirm('are you elder then 18?');
-// alert(check);
-
-// const nickname = prompt('What is your name');
-// alert(nickname);
-//////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////
-function rndm(a, b) {
-    return Math.trunc(Math.random() * (b - a) + a);
+while (inputData) {
+    let arg = inputData.split(';');
+    if (arg.length === 4) {
+        let check = findBook(library, arg[0]);
+        check === -1 || check === undefined ? library.push(new Book(arg[0], arg[1], arg[2], arg[3])) : alert(`The position of ISBN of your book in library is ${check}`);
+        inputData = prompt('Enter book data separate by ";" with four fildes like "isbn;title;author;year"');
+    }
+    else {
+        alert('ERROR: DATA is filled incorrectly');
+        inputData = prompt('Enter book data separate by ";" with four fildes like "isbn;title;author;year"');
+    }
 }
 
+printLibrary(library);
+
+function findBook(library, isbn) {
+    for (let i = 0; i <= library.length - 1; i++) {
+        if (library[i].isbn == isbn) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function printLibrary(library) {
+    for (let i = 0; i < library.length; i++) {
+        console.log(library[i]);
+    }
+}
+
+function Book(isbn, title, author, year) {
+    this.isbn = isbn;
+    this.title = title;
+    this.author = author;
+    this.year = +year;
+    this.roString = function () {
+        return `ISBN : ${this.isbn}, Title : ${this.title}, Author : ${this.author}, Year of publishing : ${this.year}`;
+    }
+}
