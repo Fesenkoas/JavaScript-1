@@ -21,7 +21,7 @@ printLibrary(library);
 
 function findBook(library, isbn) {
     for (let i = 0; i <= library.length - 1; i++) {
-        if (library[i].isbn == isbn) {
+        if (library[i].isbn === isbn) {
             return i;
         }
     }
@@ -30,7 +30,7 @@ function findBook(library, isbn) {
 
 function printLibrary(library) {
     for (let i = 0; i < library.length; i++) {
-        console.log(library[i]);
+        console.log(library[i].roString());
     }
 }
 
