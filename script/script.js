@@ -30,9 +30,8 @@ function printLibrary(library) {
         let p = document.createElement('p');
         let book = document.createTextNode(`Book number ${i+1} : ${library[i].toString()}`);
         p.appendChild(book);
-        newbook.appendChild(p, newbook.firstElementChild);
+        newbook.appendChild(p);
     }
-
 }
 
 function Book(isbn, title, author, year) {
