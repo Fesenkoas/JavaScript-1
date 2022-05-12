@@ -10,4 +10,7 @@
     height: 60px;
     background-color: red;
     position: absolute;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
