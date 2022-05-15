@@ -1,23 +1,30 @@
-const button = document.getElementById('button');
-const name1 = document.getElementById('name1');
-const name2 = document.getElementById('name2');
-button.addEventListener('click', show);
-button.addEventListener('click', e => console.log(e.timeStamp));
-const names = [name1, name2];
+const img = [
+    './images/Rouen_Cathedral_1.jpg',
+    './images/Rouen_Cathedral_2.jpg',
+    './images/Rouen_Cathedral_3.jpg',
+    './images/Rouen_Cathedral_4.jpg',
+    './images/Rouen_Cathedral_5.jpg',
+    './images/Rouen_Cathedral_6.jpg'
+]
+const prev = document.getElementById('buttonPrev');
+const next = document.getElementById('buttonNext');
+const picture = document.getElementById('picture');
+let i = 0;
 
-for (let i = 0; i < names.length; i++) {
-    names[i].onkeyup = valueToUpperCase;
-}
+prev.onclick = prevHandler;
+next.onclick = nextHandler;
 
-function show() {
-    for (let i = 1; i < names.length; i++) {
-        const p = document.createElement('p');
-        const text = document.createTextNode(names[i].value);
-        p.appendChild(text);
-        document.body.appendChild(p);
+function nextHandler (){
+    if(i < img.length){
+    picture.src = img[i++];
     }
+    else i = 0;
 }
 
-function valueToUpperCase(e) {
-    e.target.value = e.target.value.toUpperCase();
+function prevHandler (){
+    if(i > 0){
+    picture.src = img[i--];
+    }
+    else i = img.length-1;
 }
+
