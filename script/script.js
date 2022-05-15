@@ -1,30 +1,21 @@
-const img = [
-    './images/Rouen_Cathedral_1.jpg',
-    './images/Rouen_Cathedral_2.jpg',
-    './images/Rouen_Cathedral_3.jpg',
-    './images/Rouen_Cathedral_4.jpg',
-    './images/Rouen_Cathedral_5.jpg',
-    './images/Rouen_Cathedral_6.jpg'
-]
-const prev = document.getElementById('buttonPrev');
-const next = document.getElementById('buttonNext');
-const picture = document.getElementById('picture');
-let i = 0;
+const item = document.getElementById('item');
+const addItem = document.getElementById('addItem');
+const todoList = document.getElementById('todoList');
 
-prev.onclick = prevHandler;
-next.onclick = nextHandler;
+addItem.onclick = () => {
+    const text = item.value.trim();
+    if (text) {
+        const li = document.createElement('li');
+        const buttonDel = document.createElement('button');
+        buttonDel.append(document.createTextNode('X'));
+        buttonDel.classList.add('del')
+        buttonDel.onclick = e => {
+            //li.remove();
+            e.target.parentElement.remove();
+        }
 
-function nextHandler (){
-    if(i < img.length){
-    picture.src = img[i++];
+        li.append(document.createTextNode(text), buttonDel);
+        todoList.append(li);
     }
-    else i = 0;
-}
-
-function prevHandler (){
-    if(i > 0){
-    picture.src = img[i--];
-    }
-    else i = img.length-1;
-}
-
+    item.value = ''
+};
