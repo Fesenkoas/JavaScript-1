@@ -2,7 +2,10 @@ const item = document.getElementById('item');
 const addItem = document.getElementById('addItem');
 const todoList = document.getElementById('todoList');
 
-addItem.onclick = () => {
+addItem.addEventListener('click', myevent);
+item.addEventListener('keypress', e => e.key === "Enter" ? myevent() : null);
+
+function myevent () {
     const text = item.value.trim();
     if (text) {
         const li = document.createElement('li');
@@ -13,11 +16,8 @@ addItem.onclick = () => {
             //li.remove();
             e.target.parentElement.remove();
         }
-
         li.append(document.createTextNode(text), buttonDel);
         todoList.append(li);
     }
     item.value = ''
 };
-
-//HW add enter like onclick
