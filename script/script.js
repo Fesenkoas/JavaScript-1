@@ -19,3 +19,5 @@ addItem.onclick = () => {
     }
     item.value = ''
 };
+
+//HW add enter like onclick
