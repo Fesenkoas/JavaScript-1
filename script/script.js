@@ -1,94 +1,80 @@
-const arr = ['one', 'two', 'thRee', 'eight', 'thrEE', 'three', 'six'];
-let res = arr.indexOf('three');//second argument fromIndex...
-console.log(`indexOf method is ${res}`);
-res = arr.lastIndexOf('three');
-console.log(`lastIndexOf method is ${res}`);
-res = arr.includes('three');
-console.log(`includes method is ${res}`);
-res = arr.findIndex(item => 'three' === item.toLowerCase());// second argument fromIndex...
-console.log(`findIndex method is ${res}`);
+const persons = [];
+const personId = document.getElementById('personId');
+const firstName = document.getElementById('firstName');
+const lastName = document.getElementById('lastName');
+const age = document.getElementById('age');
+const addPerson = document.getElementById('addPerson');
+const calcStats = document.getElementById('calcStats');
+const stats = document.getElementById('stats');
+const personsList = document.getElementById('personsList');
+const allFields = document.querySelectorAll('input');
+let statsCount = 0;
 
-const persons = [
-    {
-        name: 'Petya',
-        age: 23
-    },
-    {
-        name: 'John',
-        age: 28
-    },
-    {
-        name: 'Tigran',
-        age: 26
-    },
-    {
-        name: 'Rabindranat',
-        age: 23
+addPerson.addEventListener('click', newPerson);
+calcStats.addEventListener('click', toStats);
+
+function newPerson() {
+    if (personId.value !== "" && firstName.value !== "" && lastName.value !== "" && age.value !== "") {
+        for (let i = 0; i < persons.length; i++) {
+            if (personId.value === persons[i].id) {
+                allFields.forEach(input => input.value = '');
+                return alert(`sorry, we already have a person with the same id at ${i + 1} number`);
+            }
+        }
+        let person = new Person(personId.value, firstName.value, lastName.value, age.value);
+        persons.push(person);
+        toOl();
     }
-];
+    else {
+        return alert(`all fields must be filled`);
+    }
+}
 
-res = persons.findIndex(e => e.name === 'Tigran');
-console.log(`Tigran is on the ${res} position`);
-console.log('forEach method =========================>');
-persons.forEach((p, i) => console.log(`${i+1} : ${p.name}, age : ${p.age}`));
-console.log('filter method =========================>');
-res = persons.filter((p, i) => p.age > 25);
-console.log(res);
-console.log('map method =========================>');
-const list = persons.map((p, i) => `<li> ${p.name}, age : ${p.age}</li>`);
-console.log(list);
+function toOl() {
+    const text = `ID : ${personId.value}; First name : ${firstName.value}; Last name : ${lastName.value}; Age : ${age.value};`
+    let li = document.createElement('li');
+    personsList.appendChild(li);
+    li.append(document.createTextNode(text));
+    allFields.forEach(input => input.value = '');
+}
 
-const numbers = [5,9,11,2,7,13,2];
-console.log('reduce method ===================>');
-res = numbers.reduce((accum, item) => accum * item);
-console.log(res);
+function toStats() {
+    let avarageAge = persons.reduce((a, b) => a + b.age, 0) / persons.length;
+    let minAge = persons.reduce((a, b) => b.age < a ? b.age : a, persons[0].age);
+    let maxAge = persons.reduce((a, b) => b.age < a ? a : b.age, persons[0].age);
+    if (statsCount === 0) { 
+        let text = `The avarage age of those persons is ${avarageAge}`;
+        let p = document.createElement('p');
+        stats.appendChild(p);
+        p.append(document.createTextNode(text));
+        text = `The minimum age of those persons is ${minAge}`;
+        p = document.createElement('p');
+        stats.appendChild(p);
+        p.append(document.createTextNode(text));
+        text = `The maximum age of those persons is ${maxAge}`;
+        p = document.createElement('p');
+        stats.appendChild(p);
+        p.append(document.createTextNode(text));
+        statsCount++;        
+    }else{
+        text = `The avarage age of those persons is ${avarageAge}`;
+        p = document.createElement('p');
+        p.append(document.createTextNode(text));
+        stats.replaceChild(p, stats.children[1]);
+        text = `The minimum age of those persons is ${minAge}`;
+        p = document.createElement('p');
+        p.append(document.createTextNode(text));
+        stats.replaceChild(p, stats.children[2]);
+        text = `The maximum age of those persons is ${maxAge}`;
+        p = document.createElement('p');
+        p.append(document.createTextNode(text));
+        stats.replaceChild(p, stats.children[3]);
+    }
+}
 
-const personslist = list.reduce((accum, item) => accum + item, '');
-console.log(personslist);
-
-items.innerHTML = personslist;
-
-res = persons.reduce((accum, person) => accum + person.age, 0);
-console.log(`summ of ages is : ${res}`);
-
-res = numbers.sort((a,b) => a - b);
-console.log(persons);
-
-persons.sort((p1,p2) => {
-   let t = p2.age - p1.age;
-   if(t !== 0){
-       return t;
-   }
-   else{
-       return p2.name.localeCompare(p1.name);
-   }
-});
-console.log(persons);
-
-
-
-// arr.customSearchIndex = function (callback){
-//     for(let i = 0; i < this.length; i++){
-//         if(callback(this[i], i))
-//         return i;
-//     }
-//     return -1;
-// }
-
-// res = arr.customSearchIndex(item => item === 'six')
-// console.log(`customSearchMethod is ${res}`);
-
-// function search(item, arr){
-//     let res = [];
-//     let index = arr.indexOf(item);
-//     while(index !== -1){
-//         res.push(index);
-//         index = arr.indexOf(item, index + 1);
-//     }
-//     return res;
-// }
-
-// res = search('three', arr);
-// console.log(res);
-
-
+function Person(id, firstName, lastName, age) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = +age;
+}
