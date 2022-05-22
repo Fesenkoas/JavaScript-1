@@ -1,80 +1,63 @@
-const persons = [];
-const personId = document.getElementById('personId');
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
-const age = document.getElementById('age');
-const addPerson = document.getElementById('addPerson');
-const calcStats = document.getElementById('calcStats');
-const stats = document.getElementById('stats');
-const personsList = document.getElementById('personsList');
-const allFields = document.querySelectorAll('input');
-let statsCount = 0;
+// //inharitance
+// const human = {
+//     hobby: 'chess',
+//     fullName: function () { return `${this.firstName} ${this.lastName}` },
+// }
 
-addPerson.addEventListener('click', newPerson);
-calcStats.addEventListener('click', toStats);
+// const john = {
+//     firstName: 'John',
+//     lastName: 'Smith',
+// }
 
-function newPerson() {
-    if (personId.value !== "" && firstName.value !== "" && lastName.value !== "" && age.value !== "") {
-        for (let i = 0; i < persons.length; i++) {
-            if (personId.value === persons[i].id) {
-                allFields.forEach(input => input.value = '');
-                return alert(`sorry, we already have a person with the same id at ${i + 1} number`);
-            }
+// console.log(john);
+
+// john.__proto__ = human;
+
+// console.log(john.hobby);
+// john.hobby = 'canabis';
+// console.log(john.fullName());
+
+// Person.prototype = human;
+// const peter = new Person('Peter', 'Jackson');
+// const marry = new Person('Marry', 'Smith');
+// // peter.__proto__ = person;
+// // marry.__proto__ = person;
+// console.log(peter.fullName());
+// console.log(marry.fullName());
+// console.log('========================================');
+
+// Array.prototype.printArray = function () {
+//     // this.forEach((a) => console.log(a));// DON'T USE THIS SHIT, USE FOR!
+//     for (let i = 0; i < this.length; i++) {
+//         console.log(this[i]);
+//     }
+//     console.log('========================================');
+// }
+
+// const numbers = new Array(2, 3, 5, 7, 11, 13); //[2, 3, 5, 7, 11, 13];
+
+// numbers.printArray();
+
+// // function printArray(arr){
+// //     arr.forEach(a => console.log(a));
+// //     console.log('========================================');
+// // }
+
+// //printArray(numbers);
+
+// function Person(firstName, lastName) {
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+// }
+
+//Polimorphism
+const sum = function (a, b, ...rest) {
+    let res = a + b;
+        for (let i = 0; i < rest.length; i++) {
+            res += rest[i];
         }
-        let person = new Person(personId.value, firstName.value, lastName.value, age.value);
-        persons.push(person);
-        toOl();
-    }
-    else {
-        return alert(`all fields must be filled`);
-    }
+        return res;
 }
+const res = sum(3, 5, 7, 9);
+console.log(res);
 
-function toOl() {
-    const text = `ID : ${personId.value}; First name : ${firstName.value}; Last name : ${lastName.value}; Age : ${age.value};`
-    let li = document.createElement('li');
-    personsList.appendChild(li);
-    li.append(document.createTextNode(text));
-    allFields.forEach(input => input.value = '');
-}
-
-function toStats() {
-    let avarageAge = persons.reduce((a, b) => a + b.age, 0) / persons.length;
-    let minAge = persons.reduce((a, b) => b.age < a ? b.age : a, persons[0].age);
-    let maxAge = persons.reduce((a, b) => b.age < a ? a : b.age, persons[0].age);
-    if (statsCount === 0) { 
-        let text = `The avarage age of those persons is ${avarageAge}`;
-        let p = document.createElement('p');
-        stats.appendChild(p);
-        p.append(document.createTextNode(text));
-        text = `The minimum age of those persons is ${minAge}`;
-        p = document.createElement('p');
-        stats.appendChild(p);
-        p.append(document.createTextNode(text));
-        text = `The maximum age of those persons is ${maxAge}`;
-        p = document.createElement('p');
-        stats.appendChild(p);
-        p.append(document.createTextNode(text));
-        statsCount++;        
-    }else{
-        text = `The avarage age of those persons is ${avarageAge}`;
-        p = document.createElement('p');
-        p.append(document.createTextNode(text));
-        stats.replaceChild(p, stats.children[1]);
-        text = `The minimum age of those persons is ${minAge}`;
-        p = document.createElement('p');
-        p.append(document.createTextNode(text));
-        stats.replaceChild(p, stats.children[2]);
-        text = `The maximum age of those persons is ${maxAge}`;
-        p = document.createElement('p');
-        p.append(document.createTextNode(text));
-        stats.replaceChild(p, stats.children[3]);
-    }
-}
-
-function Person(id, firstName, lastName, age) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = +age;
-}
