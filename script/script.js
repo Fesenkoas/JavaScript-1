@@ -41,31 +41,44 @@ function toOl() {
     personsList.appendChild(li);
     li.append(document.createTextNode(text), " ", closeButton);
     allFields.forEach(input => input.value = '');
+    closeButton.onclick = e => {
+        let res = e.target.parentElement.textContent;
+        let elements = res.split(';', 4);
+        for (i = 0; i < persons.length; i++) {
+            if (elements[0] === 'ID : ' + persons[i].id) {
+                persons.splice(i, 1);
+            }
+        }
+        e.target.parentElement.remove();
+        toStats();
+    }
 }
 
 function toStats() {
-    let avarageAge = persons.reduce((a, b) => a + b.age, 0) / persons.length;
-    let minAge = persons.reduce((a, b) => b.age < a ? b.age : a, persons[0].age);
-    let maxAge = persons.reduce((a, b) => b.age < a ? a : b.age, persons[0].age);
-    if (!statsCount) {
-        let text = `The avarage age of those persons is ${avarageAge}`;
-        let p = document.createElement('p');
-        stats.appendChild(p);
-        p.append(document.createTextNode(text));
-        text = `The minimum age of those persons is ${minAge}`;
-        p = document.createElement('p');
-        stats.appendChild(p);
-        p.append(document.createTextNode(text));
-        text = `The maximum age of those persons is ${maxAge}`;
-        p = document.createElement('p');
-        stats.appendChild(p);
-        p.append(document.createTextNode(text));
-        statsCount = true;
-    } else {
-        while (stats.firstElementChild.nextElementSibling) {
-            stats.removeChild(stats.firstElementChild.nextElementSibling);
+    if (persons.length > 0) {
+        let avarageAge = persons.reduce((a, b) => a + b.age, 0) / persons.length;
+        let minAge = persons.reduce((a, b) => b.age < a ? b.age : a, persons[0].age);
+        let maxAge = persons.reduce((a, b) => b.age < a ? a : b.age, persons[0].age);
+        if (!statsCount) {
+            let text = `The avarage age of those persons is ${avarageAge.toFixed(1)}`;
+            let p = document.createElement('p');
+            stats.appendChild(p);
+            p.append(document.createTextNode(text));
+            text = `The minimum age of those persons is ${minAge}`;
+            p = document.createElement('p');
+            stats.appendChild(p);
+            p.append(document.createTextNode(text));
+            text = `The maximum age of those persons is ${maxAge}`;
+            p = document.createElement('p');
+            stats.appendChild(p);
+            p.append(document.createTextNode(text));
+            statsCount = true;
+        } else {
+            while (stats.firstElementChild.nextElementSibling) {
+                stats.removeChild(stats.firstElementChild.nextElementSibling);
+            }
+            statsCount = false;
         }
-        statsCount = false;
     }
 }
 
