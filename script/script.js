@@ -80,6 +80,12 @@ function toStats() {
             statsCount = false;
         }
     }
+    else{
+        while (stats.firstElementChild.nextElementSibling) {
+            stats.removeChild(stats.firstElementChild.nextElementSibling);
+        }
+        statsCount = false;
+    }
 }
 
 function Person(id, firstName, lastName, age) {
