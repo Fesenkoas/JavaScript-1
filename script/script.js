@@ -74,18 +74,19 @@ function toStats() {
             p.append(document.createTextNode(text));
             statsCount = true;
         } else {
-            while (stats.firstElementChild.nextElementSibling) {
-                stats.removeChild(stats.firstElementChild.nextElementSibling);
-            }
-            statsCount = false;
+            removeStats();
         }
     }
     else{
-        while (stats.firstElementChild.nextElementSibling) {
-            stats.removeChild(stats.firstElementChild.nextElementSibling);
-        }
-        statsCount = false;
+        removeStats();
     }
+}
+
+function removeStats() {
+    while (stats.firstElementChild.nextElementSibling) {
+        stats.removeChild(stats.firstElementChild.nextElementSibling);
+    }
+    statsCount = false;
 }
 
 function Person(id, firstName, lastName, age) {
