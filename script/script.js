@@ -50,6 +50,7 @@ function toOl() {
             }
         }
         e.target.parentElement.remove();
+        statsCount =true;
         toStats();
     }
 }
