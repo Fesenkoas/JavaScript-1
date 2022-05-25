@@ -42,13 +42,8 @@ function toOl() {
     li.append(document.createTextNode(text), " ", closeButton);
     allFields.forEach(input => input.value = '');
     closeButton.onclick = e => {
-        let res = e.target.parentElement.textContent;
-        let elements = res.split(';', 4);
-        for (i = 0; i < persons.length; i++) {
-            if (elements[0] === 'ID : ' + persons[i].id) {
-                persons.splice(i, 1);
-            }
-        }
+        const index = persons.findIndex(i => i.id === persons.id);
+        persons.splice(index, 1);
         e.target.parentElement.remove();
         statsCount =true;
         toStats();
