@@ -61,7 +61,7 @@ function Person(id, firstName, lastName, age) {
     this.lastName = lastName;
     this.age = age;
     this.ageCalc =  function ageCalc() {
-        const ageDate = new Date(age);
+        const ageDate = new Date(this.age);
         const month = Date.now() - ageDate.getTime();
         const dateOfBirth = new Date(month);
         const year = dateOfBirth.getUTCFullYear();
