@@ -7,7 +7,7 @@ addPerson.onclick = function () {
     } else {
         clearStats();
         persons.push(person);
-        const li = createInfoElement(`ID: ${person.id}, First name: ${person.firstName}, Last name: ${person.lastName}, Date of birth: ${person.age}`, 'li');
+        const li = createInfoElement(person.toString(), 'li');
         const buttonDel = createInfoElement('X', 'button');
         buttonDel.classList.add('del');
         buttonDel.onclick = function ({ target }) {
@@ -68,6 +68,6 @@ function Person(id, firstName, lastName, age) {
         return age = Math.abs(year - 1970);
     };
     this.toString = function () {
-        return `ID: ${this.id}, ${this.firstName}, ${this.lastName}, age: ${this.age}`;
+        return `ID: ${this.id}, First name: ${this.firstName}, Last name: ${this.lastName}, age: ${this.ageCalc()}`;
     };
 }
