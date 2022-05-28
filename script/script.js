@@ -7,7 +7,7 @@ addPerson.onclick = function () {
     } else {
         clearStats();
         persons.push(person);
-        const li = createInfoElement(person.toString(), 'li');
+        const li = createInfoElement(`ID: ${person.id}, First name: ${person.firstName}, Last name: ${person.lastName}, Date of birth: ${person.age}`, 'li');
         const buttonDel = createInfoElement('X', 'button');
         buttonDel.classList.add('del');
         buttonDel.onclick = function ({ target }) {
@@ -24,11 +24,11 @@ addPerson.onclick = function () {
 
 calcStats.onclick = function () {
     const divStats = document.createElement('div');
-    let age = persons.reduce((accum, p) => accum + p.age, 0) / persons.length;
+    let age = persons.reduce((accum, p) => accum + p.ageCalc(), 0) / persons.length;
     const h3avg = createInfoElement(`Average age: ${age.toFixed(1)}`, 'h3');
-    age = persons.reduce((min, p) => p.age < min ? p.age : min, persons[0].age);
+    age = persons.reduce((min, p) => p.ageCalc() < min ? p.ageCalc() : min, persons[0].ageCalc());
     const h3min = createInfoElement(`Min age: ${age}`, 'h3');
-    age = persons.reduce((max, p) => p.age > max ? p.age : max, persons[0].age);
+    age = persons.reduce((max, p) => p.ageCalc() > max ? p.ageCalc() : max, persons[0].ageCalc());
     const h3max = createInfoElement(`Max age: ${age}`, 'h3');
     divStats.append(h3avg, h3min, h3max);
     if (stats.firstElementChild.nextElementSibling) {
@@ -59,13 +59,14 @@ function Person(id, firstName, lastName, age) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.age = function ageCalc() {
+    this.age = age;
+    this.ageCalc =  function ageCalc() {
         const ageDate = new Date(age);
         const month = Date.now() - ageDate.getTime();
         const dateOfBirth = new Date(month);
         const year = dateOfBirth.getUTCFullYear();
         return age = Math.abs(year - 1970);
-    } ();
+    };
     this.toString = function () {
         return `ID: ${this.id}, ${this.firstName}, ${this.lastName}, age: ${this.age}`;
     };
