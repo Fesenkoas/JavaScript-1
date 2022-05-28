@@ -6,15 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Persons</title>
-    <!-- <script src="./script/script.js" defer></script> -->
-    <!-- <script src="./script/object.js" defer></script> -->
-    <!-- <script src="./script/json.js" defer></script> -->
-    <script src="./script/destruct.js" defer></script>
+    <link rel="stylesheet" href="./style/style.css">
+    <script src="./script/script.js" defer></script>
 </head>
 
 <body>
-    
-
+    <div>
+        <label>ID:
+            <input type="text" id="personId">
+        </label>
+        <label>First name:
+            <input type="text" id="firstName">
+        </label>
+        <label>Last name:
+            <input type="text" id="lastName">
+        </label>
+        <label>Age:
+            <input type="date" min="0" id="age">
+        </label>
+    </div>
+    <div>
+        <button id="addPerson">Add person</button>
+        <button id="calcStats">Get stats</button>
+        <button id="banan">Click to see baNaN in console</button>
+    </div>
+    <div id="stats">
+        <h2>Stats</h2>
+    </div>
+    <div>
+        <h2>Persons</h2>
+        <ol id="personsList"></ol>
+    </div>
 
 </body>
 
