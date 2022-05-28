@@ -1,7 +1,7 @@
 const persons = [];
 
 addPerson.onclick = function () {
-    const person = new Person(personId.value.trim(), firstName.value.trim(), lastName.value.trim(), ageCalc());
+    const person = new Person(personId.value.trim(), firstName.value.trim(), lastName.value.trim(), age.value);
     if (persons.findIndex(item => item.id === person.id) >= 0) {
         alert(`Person with id = ${person.id} exists`);
     } else {
@@ -51,14 +51,6 @@ function createInfoElement(content, tag) {
     return element;
 }
 
-function ageCalc() {
-    const ageDate = new Date(age.value);
-    const month = Date.now() - ageDate.getTime();
-    const dateOfBirth = new Date(month);
-    const year = dateOfBirth.getUTCFullYear();
-    return Math.abs(year - 1970);
-}
-
 banan.onclick = function baNaN() {
     console.log('b' + 'a' + +'a');
 }
@@ -67,8 +59,14 @@ function Person(id, firstName, lastName, age) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.age = +age;
+    this.age = function ageCalc() {
+        const ageDate = new Date(age);
+        const month = Date.now() - ageDate.getTime();
+        const dateOfBirth = new Date(month);
+        const year = dateOfBirth.getUTCFullYear();
+        return age = Math.abs(year - 1970);
+    } ();
     this.toString = function () {
         return `ID: ${this.id}, ${this.firstName}, ${this.lastName}, age: ${this.age}`;
-    }
+    };
 }
